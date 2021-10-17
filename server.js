@@ -2,13 +2,17 @@ const express = require('express')
 const app = express()
 const module2 = require('./test/module2')
 const path = require('path')
+const compression = require('compression')
+const cookieParser = require('cookie-parser')
 
+app.use(compression())
 app.use(express.json({
-    limit: '3mb'
+    limit: '10mb'
 }))
 app.use(express.urlencoded({
-    limit: '3mb'
+    limit: '10mb'
 }))
+app.use(cookieParser())
 
 app.use(express.static(path.join(__dirname,'./public')))
 
