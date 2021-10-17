@@ -1,3 +1,4 @@
 # belajarNodeJS
 
-saya tambahkan
+> npm install
+> npm run start:server
