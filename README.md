@@ -45,3 +45,17 @@ db.createUser({
 "C:\Program Files\MongoDB\Tools\100\bin\mongodump" --uri="mongodb+srv://admin:test123@cluster0.ttujf.mongodb.net/sample_training"
 "C:\Program Files\MongoDB\Tools\100\bin\mongorestore" --host=127.0.0.1 --port=27017 --authenticationDatabase="belajardb" -u="admin" -p="test123" ./dump/
 
+-----
+.env
+PORT=9005
+#DB_STR=mongodb://admin:test123@localhost:27017/belajardb
+DB_STR=mongodb+srv://admin:test123@cluster0.ttujf.mongodb.net/belajardb
+DEFAULT_TIMEOUT=60000
+FILE_LIMIT=5MB
+COOKIE_DOMAIN=localhost
+COOKIE=jwt
+SECRET=rahasiaYrhdwE272Dje
+TOKEN_MAXAGE=97776000000
+NODE_ENV=development
+TOKEN_SECURE=false
+TOKEN_HTTPONLY=true
