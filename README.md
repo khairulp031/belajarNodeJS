@@ -1,4 +1,5 @@
 # belajarNodeJS
 
+> npm i nodemon -g
 > npm install
-> npm run start:server
+> npm start

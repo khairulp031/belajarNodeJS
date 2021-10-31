@@ -1,8 +1,8 @@
 const Fs = require('fs');
 const CsvReadableStream = require('csv-reader');
-const module1 = require('./test/module1.js')
+const module1 = require('../test/module1.js')
 
-let inputStream = Fs.createReadStream('test.csv', 'utf8');
+let inputStream = Fs.createReadStream('../data/test.csv', 'utf8');
 
 inputStream
 	.pipe(new CsvReadableStream({ parseNumbers: true, parseBooleans: true, trim: true }))

@@ -1,27 +1,39 @@
 const express = require('express')
 const app = express()
-const module2 = require('./test/module2')
+const env = require('node-env-file');
+env('.env');
 const path = require('path')
 const compression = require('compression')
 const cookieParser = require('cookie-parser')
+const { nohttp, nocache } = require('./util/setHeader')
+const { startDB, stopDB } = require('./util/mongodb')
+
+startDB(process.env.DB_STR)
 
 app.use(compression())
 app.use(express.json({
-    limit: '10mb'
+    limit: process.env.FILE_LIMIT || '5mb'
 }))
 app.use(express.urlencoded({
-    limit: '10mb'
+    limit: process.env.FILE_LIMIT || '5mb'
 }))
-app.use(cookieParser())
+app.use(cookieParser({
+    limit: process.env.FILE_LIMIT || '5mb'
+}));
+app.use(nohttp)
+app.use(express.static(path.join(__dirname, './public')))
 
-app.use(express.static(path.join(__dirname,'./public')))
-
-app.get('/hello', function (req, res) {
+app.get('/hello', nocache, function (req, res) {
     res.send('Hello World')
 })
 
-app.use('/test', module2)
+const { createToken, verifyToken } = require('./util/token')
+app.use('/createtoken', nocache, createToken, function (req, res) {
+    res.send('createtoken')
+})
 
+const api = require('./routing/index')
+app.use('/api', verifyToken, nocache, api)
 
-
-app.listen(3000)
+const server = app.listen(process.env.PORT || 3000)
+server.timeout = parseInt(process.env.DEFAULT_TIMEOUT);
