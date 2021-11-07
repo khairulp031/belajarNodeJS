@@ -33,7 +33,7 @@ app.use('/createtoken', nocache, createToken, function (req, res) {
 })
 
 const api = require('./routing/index')
-app.use('/api', verifyToken, nocache, api)
+app.use('/api', verifyToken, nocache, nohttp, api)
 
 const server = app.listen(process.env.PORT || 3000)
 server.timeout = parseInt(process.env.DEFAULT_TIMEOUT);

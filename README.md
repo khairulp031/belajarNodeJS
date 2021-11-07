@@ -65,3 +65,8 @@ MARIADB_USER=root
 MARIADB_PASSWORD=test123
 MARIADB_DB=nation
 MARIADB_CONNECTION_LIMIT=25
+
+
+------
+npm start -- -V
+

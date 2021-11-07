@@ -28,7 +28,12 @@ const createToken = (req, res, next) => {
 }
 const verifyToken = (req, res, next) => {
     const headers = req.headers
-    const token = headers['token']
+    const cookie = headers['cookie']
+    let token = cookie.split(';')
+    token = token[0].split('=')
+    token = token[1]
+    //const token1 = headers['token']
+    console.log('token', token)
     const csrf = headers['csrf']
     try {
         const decoded = jwt.verify(token, process.env.SECRET);
