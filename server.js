@@ -27,13 +27,8 @@ app.get('/hello', nocache, function (req, res) {
     res.send('Hello World')
 })
 
-const { createToken, verifyToken } = require('./util/token')
-app.use('/createtoken', nocache, createToken, function (req, res) {
-    res.send('createtoken')
-})
-
 const api = require('./routing/index')
-app.use('/api', verifyToken, nocache, nohttp, api)
+app.use('/api', nocache, api)
 
 const server = app.listen(process.env.PORT || 3000)
 server.timeout = parseInt(process.env.DEFAULT_TIMEOUT);
